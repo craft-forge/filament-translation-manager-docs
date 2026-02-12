@@ -46,61 +46,14 @@ Built specifically for Laravel's translation system:
 
 ---
 
-## Installation
+## Requirements
 
 | Plugin Version | Filament Version | PHP Version |
 |----------------|------------------|-------------|
 | 1.x            | 3.x              | 8.2+        |
 | 2.x            | 4.x / 5.x        | 8.2+        |
 
-Translation Manager is distributed via [Anystack](https://checkout.anystack.sh/translation-manager). After purchase, activate your license in your Anystack account and follow the installation instructions provided there.
-
-**1. Configure Composer.** Add the Anystack repository to your `composer.json`:
-
-```json
-{
-    "repositories": [
-        {
-            "type": "composer",
-            "url": "https://translation-manager.composer.sh"
-        }
-    ]
-}
-```
-
-**2. Authenticate.** Store your license credentials for this project:
-
-```bash
-composer config http-basic.translation-manager.composer.sh EMAIL "KEY:domain.com"
-```
-
-Replace `EMAIL`, `KEY`, and `domain.com` with your credentials and production domain (e.g., `myapp.com`). Use the same domain for both local development and production environments.
-
-**3. Install the package:**
-
-```bash
-composer require craft-forge/filament-translation-manager
-```
-
-**4. Run the installer.** This will publish the configuration file, migration, and run the migration:
-
-```bash
-php artisan filament-translation-manager:install
-```
-
-**5. Register the plugin** in your Filament Panel:
-
-```php
-use CraftForge\FilamentTranslationManager\FilamentTranslationManagerPlugin;
-
-public function panel(Panel $panel): Panel
-{
-    return $panel
-        ->plugins([
-            FilamentTranslationManagerPlugin::make(),
-        ]);
-}
-```
+Translation Manager is distributed via [Anystack](https://checkout.anystack.sh/translation-manager). See [Installation](#installation) for setup steps.
 
 ---
 
@@ -226,6 +179,59 @@ Any previous backup can be restored from the **CSV → Backups** menu. Note: res
 
 ---
 
+## Installation
+
+Translation Manager is distributed via [Anystack](https://checkout.anystack.sh/translation-manager). After purchase, activate your license in your Anystack account and follow the installation instructions provided there.
+
+**1. Configure Composer.** Add the Anystack repository to your `composer.json`:
+
+```json
+{
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://translation-manager.composer.sh"
+        }
+    ]
+}
+```
+
+**2. Authenticate.** Store your license credentials for this project:
+
+```bash
+composer config http-basic.translation-manager.composer.sh EMAIL "KEY:domain.com"
+```
+
+Replace `EMAIL`, `KEY`, and `domain.com` with your credentials and production domain (e.g., `myapp.com`). Use the same domain for both local development and production environments.
+
+**3. Install the package:**
+
+```bash
+composer require craft-forge/filament-translation-manager
+```
+
+**4. Run the installer.** This will publish the configuration file, migration, and run the migration:
+
+```bash
+php artisan filament-translation-manager:install
+```
+
+**5. Register the plugin** in your Filament Panel:
+
+```php
+use CraftForge\FilamentTranslationManager\FilamentTranslationManagerPlugin;
+
+public function panel(Panel $panel): Panel
+{
+    return $panel
+        ->plugins([
+            FilamentTranslationManagerPlugin::make(),
+        ]);
+}
+```
+
+---
+
 ## Authorization
 
 ```php
@@ -244,7 +250,6 @@ return [
     // Supported locales (first is a source language for AI)
     'locales' => ['en', 'de', 'fr', '...'],
 
-    // Navigation settings
     'navigation' => [
         'group' => 'Administration',
         'label' => 'Translations',
@@ -252,25 +257,21 @@ return [
         'sort' => 100,
     ],
 
-    // Protect keys from accidental edits
     'disable_key_and_group_editing' => true,
 
-    // Directories to scan for translation keys
     'scan_directories' => [
         app_path(),
         resource_path('views'),
-        // base_path('routes'),
-        // base_path('modules'),
+        base_path('routes'),
+        base_path('modules'),
     ],
 
-    // Automatic backups
     'backup' => [
         'enabled' => true,
         'path' => storage_path('app/translation-backups'),
         'keep_last' => 10,
     ],
 
-    // Flag icons display next to locale names in table columns and form labels
     'flags' => [
         'show_flags' => true,
         'circular_flags' => false,
@@ -280,7 +281,6 @@ return [
     'track_changes' => true,
 
     // AI Translation Services
-    // Configure the services as needed
     'translation_service' => [
     
         // DeepL - High quality, especially for European languages
