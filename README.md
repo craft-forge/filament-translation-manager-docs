@@ -7,10 +7,10 @@ Translate entire locales in seconds using bulk AI, with file-based storage, zero
 ## Highlights
 
 ### Zero Runtime Overhead
-Unlike database-driven translation managers, this plugin uses **file-based storage**. Your translations are published to standard Laravel `lang/` files, meaning:
+Unlike database-driven translation managers, this plugin uses **file-based storage**. Translations are published to standard Laravel `lang/` files, meaning:
 - **Zero database queries** for translations at runtime
 - Full compatibility with Laravel's translation caching
-- No performance impact on your production application
+- No performance impact on production applications
 
 ### AI-Powered Workflow
 Translate instantly with **integrated AI services**:
@@ -20,7 +20,7 @@ Translate instantly with **integrated AI services**:
 
 ### Laravel-Native Integration
 Built specifically for Laravel's translation system:
-- **Auto-generates** translation keys by scanning your code
+- **Auto-generates** translation keys by scanning the codebase
 - **Manage vendor packages** and Laravel core translations from a unified UI
 - Preserves placeholders (`:attribute`, `:count`) during AI translation
 - Handles pluralization syntax (`{0} None|{1} One|[2,*] :count items`)
@@ -38,9 +38,9 @@ Built specifically for Laravel's translation system:
 | ✏️ | **Inline Editing**     | Edit all locales for a key on a single page                                                              |
 | 📦 | **Package Management** | Publish and manage vendor package translations and Laravel core files from a unified UI                  |
 | 🎯 | **Smart Filters**      | Filter by group, vendor, type, date range, missing translation, duplicate values, or unpublished changes |
-| 🔍 | **Code Scanner**       | Automatically find and generate translation keys from your codebase                                      |
-| 🔎 | **Key Usage Finder**   | See exactly where each translation key is used in your code                                              |
-| 📊 | **CSV Import/Export**  | Share translations with external translators or backup your work                                         |
+| 🔍 | **Code Scanner**       | Automatically find and generate translation keys from the codebase                                       |
+| 🔎 | **Key Usage Finder**   | See exactly where each translation key is used in the code                                               |
+| 📊 | **CSV Import/Export**  | Share translations with external translators or create backups                                           |
 | 💾 | **Automatic Backups**  | Automatic snapshots before publishing translations to files                                              |
 | 📝 | **Change Tracking**    | Visual indicators show which translations differ from published lang files                               |
 
@@ -61,7 +61,7 @@ Translation Manager is distributed via [Anystack](https://checkout.anystack.sh/t
 
 ### Workflow
 
-1. **Import** existing translations from your `lang/` files
+1. **Import** existing translations from `lang/` files
 2. **Edit** translations in the Filament UI
 3. **Publish** changes back to `lang/` files
 
@@ -92,7 +92,7 @@ Browse all translations with dynamic columns for each locale. Search by key, gro
 
 ![Import Translations](https://raw.githubusercontent.com/craft-forge/filament-translation-manager-docs/master/.github/import.gif)
 
-Load translations from your `lang/` files into the database with optional code scanning to catch new keys first.
+Load translations from `lang/` files into the database with optional code scanning to catch new keys first.
 
 **CSV workflows:**
 - **CSV Export:** Download all translations for external translators or backup
@@ -127,14 +127,14 @@ Laravel placeholders and pluralization syntax are preserved automatically.
 
 ![Unpublished Changes](https://raw.githubusercontent.com/craft-forge/filament-translation-manager-docs/master/.github/unpublished-changes.jpg)
 
-The plugin tracks which translations have unpublished changes, i.e. values that differ from what's in your `lang/` files.
+The plugin tracks which translations have unpublished changes, i.e. values that differ from what is currently in `lang/` files.
 
 **Visual indicators:**
 - **Table view:** Modified locale values are highlighted in green
 - **Edit page:** Each modified field shows the previous value from files
 - **Filter:** Use "Has Unpublished Changes" filter to see only modified translations
 
-This helps you know exactly what will be written when you click **Publish**.
+This makes it clear exactly what will be written when **Publish** is clicked.
 
 > **Note:** Change tracking can be disabled in config with `'track_changes' => false`
 
@@ -142,7 +142,7 @@ This helps you know exactly what will be written when you click **Publish**.
 
 ### Publishing
 
-Click **Publish** to write all translations from the database to your `lang/` files. A backup is automatically created before publishing.
+Click **Publish** to write all translations from the database to `lang/` files. A backup is automatically created before publishing.
 
 ---
 
@@ -165,7 +165,7 @@ Published translations are automatically imported into the database and become e
 
 ![Key Usage](https://raw.githubusercontent.com/craft-forge/filament-translation-manager-docs/master/.github/check-usage.jpg)
 
-Click **Check Usage** on any translation to see where it's used in your codebase. Laravel system keys (validation, auth, etc.) are recognized as framework-internal.
+Click **Check Usage** on any translation to see where the key is used in the codebase. Laravel system keys (validation, auth, etc.) are recognized as framework-internal.
 
 ---
 
@@ -181,9 +181,9 @@ Any previous backup can be restored from the **CSV → Backups** menu. Note: res
 
 ## Installation
 
-Translation Manager is distributed via [Anystack](https://checkout.anystack.sh/translation-manager). After purchase, activate your license in your Anystack account and follow the installation instructions provided there.
+Translation Manager is distributed via [Anystack](https://checkout.anystack.sh/translation-manager). After purchase, activate the license in the Anystack account and follow the installation instructions provided there.
 
-**1. Configure Composer.** Add the Anystack repository to your `composer.json`:
+**1. Configure Composer.** Add the Anystack repository to `composer.json`:
 
 ```json
 {
@@ -196,13 +196,13 @@ Translation Manager is distributed via [Anystack](https://checkout.anystack.sh/t
 }
 ```
 
-**2. Authenticate.** Store your license credentials for this project:
+**2. Authenticate.** Store the license credentials for the project:
 
 ```bash
 composer config http-basic.translation-manager.composer.sh EMAIL "KEY:domain.com"
 ```
 
-Replace `EMAIL`, `KEY`, and `domain.com` with your credentials and production domain (e.g., `myapp.com`). Use the same domain for both local development and production environments.
+Replace `EMAIL`, `KEY`, and `domain.com` with the actual credentials and production domain (e.g., `myapp.com`). The same domain should be used for both local development and production environments.
 
 **3. Install the package:**
 
@@ -216,7 +216,7 @@ composer require craft-forge/filament-translation-manager
 php artisan filament-translation-manager:install
 ```
 
-**5. Register the plugin** in your Filament Panel:
+**5. Register the plugin** in the Filament Panel:
 
 ```php
 use CraftForge\FilamentTranslationManager\FilamentTranslationManagerPlugin;
@@ -233,6 +233,8 @@ public function panel(Panel $panel): Panel
 ---
 
 ## Authorization
+
+Access to the translation manager can be restricted using the `authorize` method. The closure receives the authenticated user and should return `true` to grant access:
 
 ```php
 FilamentTranslationManagerPlugin::make()
