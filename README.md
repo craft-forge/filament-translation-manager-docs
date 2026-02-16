@@ -243,6 +243,62 @@ FilamentTranslationManagerPlugin::make()
 
 ---
 
+## Events
+
+The plugin dispatches [Laravel events](https://laravel.com/docs/events) for all major actions. These events can be used for audit logging, notifications, usage tracking, and other integrations.
+
+Each event includes an `action` property (`TranslationActionEnum`) identifying the action type, along with relevant contextual data.
+
+### Available events
+
+| Event                               | Data                                                                                 | Description                                     |
+|-------------------------------------|--------------------------------------------------------------------------------------|-------------------------------------------------|
+| `TranslationsGeneratedEvent`        | `array $stats`                                                                       | Translation keys scanned from source code       |
+| `TranslationsImportedEvent`         | `int $created, int $updated, bool $overwrite, array $locales`                        | Language files imported into the database       |
+| `TranslationsPublishedEvent`        | `array $locales`                                                                     | Database translations written to language files |
+| `TranslationSavedEvent`             | `int $translationId, string $key, string $group`                                     | Single translation updated on the edit page     |
+| `TranslationDeletedEvent`           | `string $key, string $group`                                                         | Single translation deleted on the edit page     |
+| `AiBulkTranslationStartedEvent`     | `string $targetLocale, string $driver, int $keysCount`                               | AI bulk translation started                     |
+| `AiBulkTranslationCompletedEvent`   | `string $targetLocale, string $driver, int $translated, int $failed, int $keysCount` | AI bulk translation finished                    |
+| `AiSingleTranslationCompletedEvent` | `int $translationId, string $targetLocale, string $driver`                           | Single field AI translation completed           |
+| `PackageTranslationsPublishedEvent` | `string $namespace`                                                                  | Vendor package translations published           |
+| `PackageTranslationsDeletedEvent`   | `string $namespace`                                                                  | Vendor package translations deleted             |
+| `CsvExportedEvent`                  | —                                                                                    | Translations exported to CSV                    |
+| `CsvImportedEvent`                  | `int $created, int $updated`                                                         | Translations imported from CSV                  |
+| `BackupCreatedEvent`                | `string $filePath`                                                                   | Translation backup created                      |
+| `BackupRestoredEvent`               | `int $restoredCount`                                                                 | Translation backup restored                     |
+| `KeyUsageCheckedEvent`              | `string $fullKey, bool $isUsed, int $filesCount`                                     | Key usage check performed on the edit page      |
+
+### Listening to events
+
+Register listeners in your `AppServiceProvider` or a dedicated event service provider:
+
+```php
+use CraftForge\FilamentTranslationManager\Events\TranslationsPublishedEvent;
+use CraftForge\FilamentTranslationManager\Events\AiBulkTranslationCompletedEvent;
+use Illuminate\Support\Facades\Event;
+
+public function boot(): void
+{
+    // Notify team when translations are published
+    Event::listen(TranslationsPublishedEvent::class, function (TranslationsPublishedEvent $event): void {
+        Notification::route('slack', config('services.slack.webhook'))
+            ->notify(new TranslationsPublishedNotification($event->locales));
+    });
+
+    // Track AI translation usage
+    Event::listen(AiBulkTranslationCompletedEvent::class, function (AiBulkTranslationCompletedEvent $event): void {
+        AiUsageLog::create([
+            'driver' => $event->driver,
+            'locale' => $event->targetLocale,
+            'translated' => $event->translated,
+        ]);
+    });
+}
+```
+
+---
+
 ## Configuration
 
 ```php
