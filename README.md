@@ -1,48 +1,89 @@
-# Translation Manager
+# Translation Workflow (Lang Files)
 
-Translate entire locales in seconds using bulk AI, with file-based storage, zero runtime DB queries, codebase scanning for missing keys, and vendor package and CSV support.
-
----
-
-## Highlights
-
-### Zero Runtime Overhead
-Unlike database-driven translation managers, this plugin uses **file-based storage**. Translations are published to standard Laravel `lang/` files, meaning:
-- **Zero database queries** for translations at runtime
-- Full compatibility with Laravel's translation caching
-- No performance impact on production applications
-
-### AI-Powered Workflow
-Translate instantly with **integrated AI services**:
-- One-click translation for individual fields
-- Bulk translate entire locales in seconds
-- Choose between: DeepL, Google, ChatGPT, or Claude
-
-### Laravel-Native Integration
-Built specifically for Laravel's translation system:
-- **Auto-generates** translation keys by scanning the codebase
-- **Manage vendor packages** and Laravel core translations from a unified UI
-- Preserves placeholders (`:attribute`, `:count`) during AI translation
-- Handles pluralization syntax (`{0} None|{1} One|[2,*] :count items`)
-- Supports JSON translations, PHP group files, and vendor overrides
+Manage Laravel JSON translations, PHP group files, and vendor language files from one place. Scan codebase for missing keys, translate with AI, review unpublished changes, and publish back to standard Laravel `lang/` files with zero runtime database queries.
 
 ---
 
 ## Features
 
-|    | Feature                | Description                                                                                              |
-|----|------------------------|----------------------------------------------------------------------------------------------------------|
-| 🤖 | **AI Translation**     | Translate using DeepL, Google Translate, ChatGPT, or Claude. Individual fields or entire locales         |
-| 📁 | **File-Based Storage** | Publish to Laravel `lang/` files for native performance and caching                                      |
-| 🔄 | **Two-Way Sync**       | Import from files, edit in UI, and publish back to files                                                 |
-| ✏️ | **Inline Editing**     | Edit all locales for a key on a single page                                                              |
-| 📦 | **Package Management** | Publish and manage vendor package translations and Laravel core files from a unified UI                  |
-| 🎯 | **Smart Filters**      | Filter by group, vendor, type, date range, missing translation, duplicate values, or unpublished changes |
-| 🔍 | **Code Scanner**       | Automatically find and generate translation keys from the codebase                                       |
-| 🔎 | **Key Usage Finder**   | See exactly where each translation key is used in the code                                               |
-| 📊 | **CSV Import/Export**  | Share translations with external translators or create backups                                           |
-| 💾 | **Automatic Backups**  | Automatic snapshots before publishing translations to files                                              |
-| 📝 | **Change Tracking**    | Visual indicators show which translations differ from published lang files                               |
+### AI-Powered Translation
+Translate instantly using integrated AI services.
+- One-click translation for individual fields
+- Bulk translate entire locales in seconds
+- Choose your preferred provider: **DeepL, Google Translate, ChatGPT, or Claude**
+- Placeholders (`:attribute`, `:count`) preserved automatically
+- Handles Laravel pluralization syntax (`{0} None|{1} One|[2,*] :count items`)
+
+### Automatic Code Scanner
+Never miss translation keys again.
+- Scan the entire codebase for `__()` and other translation helpers
+- Automatically generate missing translation keys
+- See exactly where each key is used in the codebase
+
+### File-Based Storage (Zero Runtime Overhead)
+Unlike database-driven translation managers, this plugin uses **file-based storage**.
+Translations are published directly to Laravel `lang/` files.
+
+Benefits:
+- **Zero database queries** for translations at runtime
+- Full compatibility with Laravel translation caching
+- No performance impact on production applications
+
+### Two-Way Sync with Lang Files
+Work safely between the UI and your Laravel translation files.
+
+- Import existing translations from `lang/`
+- Edit them in the Filament UI
+- Publish changes back to files
+- Visual indicators show unpublished changes
+
+### Unified Translation Editor
+Edit all locales for a translation key from a single page.
+
+- Inline editing for all languages
+- Quickly identify missing translations
+- Track which values differ from published files
+
+### Vendor Translation Explorer
+
+Laravel packages often ship with their own translation files,
+but discovering and publishing them is usually manual.
+
+This plugin provides a dedicated interface where you can:
+
+- Explore **all vendor translations available in your project**
+- Instantly see which ones are **already published**
+- Publish missing translations with one click
+- Override package language files safely
+
+No artisan commands. No digging through `vendor/`.
+
+### Smart Filtering & Search
+Quickly find the translations you need. Filter by:
+- group
+- vendor package
+- translation type
+- missing translations
+- duplicate values
+- unpublished changes
+- date range
+
+### CSV Import & Export
+Collaborate with translators outside your application.
+- Export translations to CSV
+- Import updates from translators
+- Create translation backups
+
+### Automatic Backup System
+Every publish action creates a snapshot.
+- Prevent accidental data loss
+- Restore previous translation states if needed
+
+---
+
+## Demo
+
+[**→ Live Demo**](https://craftforge.io/admin/translations)
 
 ---
 
@@ -53,7 +94,7 @@ Built specifically for Laravel's translation system:
 | 1.x            | 3.x              | 8.2+        |
 | 2.x            | 4.x / 5.x        | 8.2+        |
 
-Translation Manager is distributed via [Anystack](https://checkout.anystack.sh/translation-manager). See [Installation](#installation) for setup steps.
+This plugin is distributed via [Anystack](https://checkout.anystack.sh/translation-manager). See [Installation](#installation) for setup steps.
 
 ---
 
@@ -61,13 +102,13 @@ Translation Manager is distributed via [Anystack](https://checkout.anystack.sh/t
 
 ### Workflow
 
-1. **Import** existing translations from `lang/` files
+1. **Scan & Import** translation keys from the codebase and existing translations from Laravel `lang/` files
 2. **Edit** translations in the Filament UI
 3. **Publish** changes back to `lang/` files
 
 <details>
 <summary><strong>💡 Alternative: Gitignore Lang Directory</strong></summary>
-To avoid merge conflicts in `lang/` when working in a team, exclude translations from version control:
+To avoid merge conflicts in `lang/` when working in a team, exclude translation files from version control:
 
 ```gitignore
 # .gitignore
@@ -181,7 +222,7 @@ Any previous backup can be restored from the **CSV → Backups** menu. Note: res
 
 ## Installation
 
-Translation Manager is distributed via [Anystack](https://checkout.anystack.sh/translation-manager). After purchase, activate the license in the Anystack account and follow the installation instructions provided there.
+This plugin is distributed via [Anystack](https://checkout.anystack.sh/translation-manager). After purchase, activate the license in your Anystack account and follow the installation steps below.
 
 **1. Configure Composer.** Add the Anystack repository to `composer.json`:
 
@@ -199,10 +240,10 @@ Translation Manager is distributed via [Anystack](https://checkout.anystack.sh/t
 **2. Authenticate.** Store the license credentials for the project:
 
 ```bash
-composer config http-basic.translation-manager.composer.sh EMAIL "KEY:domain.com"
+composer config http-basic.translation-manager.composer.sh EMAIL KEY
 ```
 
-Replace `EMAIL`, `KEY`, and `domain.com` with the actual credentials and production domain (e.g., `myapp.com`). The same domain should be used for both local development and production environments.
+Replace `EMAIL` and `KEY` with your actual license credentials from Anystack.
 
 **3. Install the package:**
 
@@ -234,7 +275,7 @@ public function panel(Panel $panel): Panel
 
 ## Authorization
 
-Access to the translation manager can be restricted using the `authorize` method. The closure receives the authenticated user and should return `true` to grant access:
+Access to the plugin can be restricted using the `authorize` method. The closure receives the authenticated user and should return `true` to grant access:
 
 ```php
 FilamentTranslationManagerPlugin::make()
@@ -324,6 +365,10 @@ return [
         base_path('modules'),
     ],
 
+    // Permission mode for created directories (0775 = group-writable)
+    // Use 02775 on servers with setgid group setup
+    'directory_permissions' => 0775,
+
     'backup' => [
         'enabled' => true,
         'path' => storage_path('app/translation-backups'),
@@ -410,7 +455,7 @@ php artisan vendor:publish --tag="filament-translation-manager-translations"
 
 ## Testing
 
-Translation Manager is backed by 600+ automated tests covering all functionality.
+This plugin is backed by 600+ automated tests covering all functionality.
 
 ---
 
@@ -423,4 +468,4 @@ For assistance:
 
 ## License
 
-Translation Manager is proprietary software. See [LICENSE.md](LICENSE.md) for details.
+This plugin is proprietary software. See [LICENSE.md](LICENSE.md) for details.
