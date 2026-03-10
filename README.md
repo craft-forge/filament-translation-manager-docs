@@ -464,7 +464,6 @@ This plugin is backed by 600+ automated tests covering all functionality.
 For assistance:
 
 - **Email:** [taraskovaldev@gmail.com](mailto:taraskovaldev@gmail.com)
-- **GitHub Issues:** [Report a bug](https://github.com/craft-forge/filament-translation-manager/issues)
 
 ## License
 
