@@ -292,23 +292,23 @@ Each event includes an `action` property (`TranslationActionEnum`) identifying t
 
 ### Available events
 
-| Event                               | Data                                                                                 | Description                                     |
-|-------------------------------------|--------------------------------------------------------------------------------------|-------------------------------------------------|
-| `TranslationsGeneratedEvent`        | `array $stats`                                                                       | Translation keys scanned from source code       |
-| `TranslationsImportedEvent`         | `int $created, int $updated, bool $overwrite, array $locales`                        | Language files imported into the database       |
-| `TranslationsPublishedEvent`        | `array $locales`                                                                     | Database translations written to language files |
-| `TranslationSavedEvent`             | `int $translationId, string $key, string $group`                                     | Single translation updated on the edit page     |
-| `TranslationDeletedEvent`           | `string $key, string $group`                                                         | Single translation deleted on the edit page     |
-| `AiBulkTranslationStartedEvent`     | `string $targetLocale, string $driver, int $keysCount`                               | AI bulk translation started                     |
-| `AiBulkTranslationCompletedEvent`   | `string $targetLocale, string $driver, int $translated, int $failed, int $keysCount` | AI bulk translation finished                    |
-| `AiSingleTranslationCompletedEvent` | `int $translationId, string $targetLocale, string $driver`                           | Single field AI translation completed           |
-| `PackageTranslationsPublishedEvent` | `string $namespace`                                                                  | Vendor package translations published           |
-| `PackageTranslationsDeletedEvent`   | `string $namespace`                                                                  | Vendor package translations deleted             |
-| `CsvExportedEvent`                  | —                                                                                    | Translations exported to CSV                    |
-| `CsvImportedEvent`                  | `int $created, int $updated`                                                         | Translations imported from CSV                  |
-| `BackupCreatedEvent`                | `string $filePath`                                                                   | Translation backup created                      |
-| `BackupRestoredEvent`               | `int $restoredCount`                                                                 | Translation backup restored                     |
-| `KeyUsageCheckedEvent`              | `string $fullKey, bool $isUsed, int $filesCount`                                     | Key usage check performed on the edit page      |
+| Event                             | Data                                                                                         | Description                                     |
+|-----------------------------------|----------------------------------------------------------------------------------------------|-------------------------------------------------|
+| TranslationsGeneratedEvent        | array \$stats                                                                                | Translation keys scanned from source code       |
+| TranslationsImportedEvent         | int \$created, int \$updated, bool \$overwrite, array \$locales                              | Language files imported into the database       |
+| TranslationsPublishedEvent        | array \$locales                                                                              | Database translations written to language files |
+| TranslationSavedEvent             | int \$translationId, string \$key, string \$group                                            | Single translation updated on the edit page     |
+| TranslationDeletedEvent           | string \$key, string \$group                                                                 | Single translation deleted on the edit page     |
+| AiBulkTranslationStartedEvent     | string \$targetLocale, string \$driver, int \$keysCount                                      | AI bulk translation started                     |
+| AiBulkTranslationCompletedEvent   | string \$targetLocale, string \$driver, int \$translated, int \$failed, int \$keysCount      | AI bulk translation finished                    |
+| AiSingleTranslationCompletedEvent | int \$translationId, string \$targetLocale, string \$driver                                  | Single field AI translation completed           |
+| PackageTranslationsPublishedEvent | string \$namespace                                                                           | Vendor package translations published           |
+| PackageTranslationsDeletedEvent   | string \$namespace                                                                           | Vendor package translations deleted             |
+| CsvExportedEvent                  | —                                                                                            | Translations exported to CSV                    |
+| CsvImportedEvent                  | int \$created, int \$updated                                                                 | Translations imported from CSV                  |
+| BackupCreatedEvent                | string \$filePath                                                                            | Translation backup created                      |
+| BackupRestoredEvent               | int \$restoredCount                                                                          | Translation backup restored                     |
+| KeyUsageCheckedEvent              | string \$fullKey, bool \$isUsed, int \$filesCount                                            | Key usage check performed on the edit page      |
 
 ### Listening to events
 
