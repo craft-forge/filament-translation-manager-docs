@@ -1,4 +1,4 @@
-# Translation Manager - Commercial License
+# Translation Workflow - Commercial License
 
 Copyright © 2025-present Taras Koval (CraftForge). All rights reserved.
 
@@ -6,7 +6,7 @@ Copyright © 2025-present Taras Koval (CraftForge). All rights reserved.
 
 ## License Grant
 
-This license grants you, the purchaser, a non-exclusive, non-transferable right to use the Software ("Translation Manager") under the following terms.
+This license grants you, the purchaser, a non-exclusive, non-transferable right to use the Software ("Translation Workflow") under the following terms.
 
 All licenses are **lifetime licenses** with no recurring fees. Once purchased, you receive permanent access to the Software, lifetime updates including all future major versions, and no subscription or renewal is required.
 
@@ -44,7 +44,7 @@ You **may not**:
 
 - Redistribute, resell, lease, license, or sublicense the Software to third parties
 - Share the Software source code with individuals or organizations outside your team
-- Use the Software in a product that directly competes with Translation Manager for Filament
+- Use the Software in a product that directly competes with Translation Workflow for Filament
 - Create a public repository or package containing the Software code
 - Remove or alter any proprietary notices, labels, or marks
 - Claim authorship of the unmodified Software
