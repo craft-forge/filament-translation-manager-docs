@@ -1,6 +1,8 @@
 # Translation Workflow (Lang Files)
 
-Manage Laravel JSON translations, PHP group files, and vendor language files from one place. Scan codebase for missing keys, translate with AI, review unpublished changes, and publish back to standard Laravel `lang/` files with zero runtime database queries.
+A complete translation workflow for Laravel language files inside Filament.
+
+Manage JSON translations, PHP group files, and vendor language files from one place. Scan code for missing keys, translate with AI, review unpublished changes, and publish back to standard Laravel lang/ files.
 
 ---
 
